@@ -6,30 +6,64 @@
 //
 
 import XCTest
+@testable import OnboardingApp
 
 final class OnboardingResponseTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    
+    func testValidJSONDecoding() throws {
+        
+        //Arrange
+        let json = """
+            {
+                "items": [
+                        {
+                            "id": 1,
+                            "question": "What's your occupation?",
+                            "answers": [
+                                "Medicine",
+                                "Entrepreneurship",
+                                "Retired",
+                                "Student",
+                                "Employee",
+                                "Prefer not to answer & use default settings"
+                            ]
+                        },
+                        {
+                            "id": 2,
+                            "question": "How old are you?",
+                            "answers": [
+                                "18-24",
+                                "25-34",
+                                "35-44",
+                                "45-54",
+                                "55-65",
+                                "65+"
+                            ]
+                        },
+                        {
+                            "id": 3,
+                            "question": "How did you find this scanner?",
+                            "answers": [
+                                "Facebook",
+                                "Instagram",
+                                "Google",
+                                "Ads from other app",
+                                "Other"
+                            ]
+                        }
+                    ]
+                }
+            """.data(using: .utf8)!
+        
+        let decoder = JSONDecoder()
+        
+        //Act
+        
+        let response = try decoder.decode(OnboardingResponse.self, from: json)
+        
+        //Assert
+        XCTAssertEqual(response.items.count, 3)
+        XCTAssertEqual(response.items[0].question, "What's your occupation?")
+        XCTAssertEqual(response.items[0].answers.count, 6)
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
 }

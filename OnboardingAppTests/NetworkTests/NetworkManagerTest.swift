@@ -10,35 +10,18 @@ import XCTest
 
 final class NetworkManagerTest: XCTestCase {
 
-    func testFetchOnboardingData() {
+    func testFetchOnboardingData() async throws {
         
         //Arrage
-        let networkManager = NetworkManager()
-        let expectation = XCTestExpectation(description: "Fetch onboarding data from server")
-        
-        var receivedData: OnboardingResponse?
-        var receivedError: NetworkError?
+        let networkManager = await NetworkManager()
         
         //Act
         
-        Task {
-            do {
-                receivedData = try await networkManager.fetchData(urlString: APIEndpoint.onboardingURL)
-            } catch {
-                receivedError = error as? NetworkError
-            }
-            expectation.fulfill()
-        }
-        
-        waitForExpectations(timeout: 5)
+        let receivedData: OnboardingResponse = try await networkManager.fetchData(urlString: APIEndpoint.onboardingURL)
         
         //Assert
         
-        XCTAssertNotNil(receivedData, "Expect to get onboarding data")
-        XCTAssertNil(receivedError, "Expact to not get any error")
-        
-        if let data = receivedData {
-            XCTAssertFalse(data.items.isEmpty, "Expect to get any items in onboarding data")
-        }
+        XCTAssertFalse(receivedData.items.isEmpty, "Expect at least one item in onboarding data")
+        XCTAssertNotNil(receivedData.items.first?.question, "Expect question in first item of onboarding data")
     }
 }
