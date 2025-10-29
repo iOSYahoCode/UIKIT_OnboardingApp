@@ -6,3 +6,8 @@
 //
 
 import Foundation
+struct OnboardingItem: Codable {
+    let id: Int
+    let question: String
+    let answers: [String]
+}
