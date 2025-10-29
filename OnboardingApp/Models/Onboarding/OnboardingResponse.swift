@@ -6,6 +6,6 @@
 //
 
 import Foundation
-struct OnboardingResponse: Codable {
+nonisolated struct OnboardingResponse: Codable {
     let items: [OnboardingItem]
 }
