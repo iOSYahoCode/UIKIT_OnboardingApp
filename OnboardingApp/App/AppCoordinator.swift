@@ -44,14 +44,13 @@ class AppCoordinator: Coordinator {
 extension AppCoordinator: OnboardingCoordinatorDelegate {
     func onboardingDidFinish(_ coordinator: OnboardingCoordinator) {
         remove(coordinator)
+        showPaywall()
     }
 }
 
 extension AppCoordinator: PaywallCoordinatorDelegate {
     func paywallDidFinish(_ coordinator: PaywallCoordinator) {
         remove(coordinator)
-        
-        showPaywall()
     }
     
     func paywallDidCancel(_ coordinator: PaywallCoordinator) {

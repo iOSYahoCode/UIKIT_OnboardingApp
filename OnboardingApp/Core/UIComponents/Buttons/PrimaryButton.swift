@@ -16,7 +16,7 @@ class PrimaryButton: UIButton {
     
     override var isEnabled: Bool {
         didSet {
-            updateAppearance()
+            updateAppearance(isAnimated: true)
         }
     }
     
@@ -36,9 +36,9 @@ class PrimaryButton: UIButton {
         self.disableBakgroundColor = disableBakgroundColor
         
         super.init(frame: .zero)
-        
+        isEnabled = false
         configure(with: labelText)
-        updateAppearance()
+        updateAppearance(isAnimated: false)
     }
     
     
@@ -74,7 +74,7 @@ class PrimaryButton: UIButton {
         layer.shadowOpacity = 0.15
     }
     
-    private func updateAppearance() {
+    private func updateAppearance(isAnimated: Bool) {
         guard var config = self.configuration else { return }
         
         if self.isEnabled {
@@ -87,7 +87,11 @@ class PrimaryButton: UIButton {
             self.alpha = 0.6
         }
         
-        UIView.animate(withDuration: 0.3) {
+        if isAnimated {
+            UIView.animate(withDuration: 0.3) {
+                self.configuration = config
+            }
+        } else {
             self.configuration = config
         }
     }

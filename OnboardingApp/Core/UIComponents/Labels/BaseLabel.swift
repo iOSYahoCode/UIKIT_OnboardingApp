@@ -24,6 +24,10 @@ class BaseLabel: UILabel {
         configure()
     }
     
+    convenience init(alignment: NSTextAlignment) {
+        self.init(labelText: "", alignment: alignment)
+    }
+    
     func configure() {
         translatesAutoresizingMaskIntoConstraints = false
     }
