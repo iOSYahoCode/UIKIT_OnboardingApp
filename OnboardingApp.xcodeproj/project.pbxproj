@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		BCE018232EB228910003544D /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = BCE018222EB228910003544D /* SnapKit */; };
+		BCE0DDB02EB34E0100CBF106 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = BCE0DDAF2EB34E0100CBF106 /* RxCocoa */; };
+		BCE0DDB22EB34E0100CBF106 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BCE0DDB12EB34E0100CBF106 /* RxSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCE0DDB22EB34E0100CBF106 /* RxSwift in Frameworks */,
+				BCE0DDB02EB34E0100CBF106 /* RxCocoa in Frameworks */,
 				BCE018232EB228910003544D /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -109,6 +113,8 @@
 			name = OnboardingApp;
 			packageProductDependencies = (
 				BCE018222EB228910003544D /* SnapKit */,
+				BCE0DDAF2EB34E0100CBF106 /* RxCocoa */,
+				BCE0DDB12EB34E0100CBF106 /* RxSwift */,
 			);
 			productName = OnboardingApp;
 			productReference = BCE017742EB21FE70003544D /* OnboardingApp.app */;
@@ -167,6 +173,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				BCE018212EB228910003544D /* XCRemoteSwiftPackageReference "SnapKit" */,
+				BCE0DDAE2EB34E0100CBF106 /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = BCE017752EB21FE70003544D /* Products */;
@@ -498,6 +505,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		BCE0DDAE2EB34E0100CBF106 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.9.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -505,6 +520,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BCE018212EB228910003544D /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		BCE0DDAF2EB34E0100CBF106 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BCE0DDAE2EB34E0100CBF106 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		BCE0DDB12EB34E0100CBF106 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BCE0DDAE2EB34E0100CBF106 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
