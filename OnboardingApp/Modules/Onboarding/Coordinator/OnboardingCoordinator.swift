@@ -20,19 +20,15 @@ class OnboardingCoordinator: Coordinator {
     }
     
     func start() {
+        let onboardingService = OnboardingService()
+        let viewModel = OnboardingVM(onboardingService: onboardingService)
+        let viewController = OnboardingVC(onboardingVM: viewModel)
+        viewModel.coordinator = self
         
-    }
-    
-    func finish() {
-        
-        delegate?.onboardingDidFinish(self)
-    }
-    
-    func showNextQuestion() {
-        
+        navigationController.pushViewController(viewController, animated: true)
     }
     
     func showPaywall() {
-        
+        delegate?.onboardingDidFinish(self)
     }
 }
