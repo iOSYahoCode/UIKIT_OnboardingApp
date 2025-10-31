@@ -194,7 +194,12 @@ class OnboardingVC: UIViewController {
                                       message: error.localizedDescription,
                                       preferredStyle: .alert)
         
-        alert.addAction(UIAlertAction(title: "Ok", style: .default))
+        alert.addAction(UIAlertAction(title: "Retry", style: .default) { [weak self] _ in
+            self?.viewModel.requestQuestionsTrigger.accept(())
+        })
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
         present(alert, animated: true)
     }
     
