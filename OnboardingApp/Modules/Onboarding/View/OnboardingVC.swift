@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 
 class OnboardingVC: UIViewController {
+    
     let viewModel: OnboardingVM
     let disposeBag = DisposeBag()
     

@@ -15,7 +15,6 @@ import SafariServices
 class PaywallVC: UIViewController {
     
     private let viewModel: PaywallVM
-    
     private let titleImage: UIImageView = {
         let image = UIImage(named: "Onboarding4Light")
         return UIImageView(image: image)
@@ -40,8 +39,8 @@ class PaywallVC: UIViewController {
     }()
     
     let termsTextView = TermsTextView()
-    
     let disposeBag = DisposeBag()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

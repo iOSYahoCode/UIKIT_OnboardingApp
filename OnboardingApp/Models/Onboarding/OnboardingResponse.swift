@@ -7,5 +7,6 @@
 
 import Foundation
 nonisolated struct OnboardingResponse: Codable {
+    
     let items: [OnboardingItem]
 }

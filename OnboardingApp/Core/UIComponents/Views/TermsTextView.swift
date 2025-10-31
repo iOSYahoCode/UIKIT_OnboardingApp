@@ -72,6 +72,8 @@ class TermsTextView: UITextView {
     }
 }
 
+//MARK: Extension
+
 extension TermsTextView: UITextViewDelegate {
     
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {

@@ -7,6 +7,7 @@
 
 import Foundation
 struct TermsUrl {
+    
     static let termsOfUse = "https://uni.tech"
     static let privacyPolicy = "https://uni.tech/join-universe-group"
     static let subscriptionTerms = "https://www.linkedin.com/in/yaroslav-homziak/"

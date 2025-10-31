@@ -7,14 +7,18 @@
 
 import UIKit
 
+//MARK: Protocols
 protocol PaywallCoordinatorDelegate: AnyObject {
     func paywallDidFinish(_ coordinator: PaywallCoordinator)
     func paywallDidCancel(_ coordinator: PaywallCoordinator)
 }
 
+//MARK: Class
 class PaywallCoordinator: Coordinator {
+    
     let navigationController: UINavigationController
     weak var delegate: PaywallCoordinatorDelegate?
+    
     
     init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
