@@ -30,7 +30,7 @@ class PaywallVM {
     
     private func setupBindings() {
         cancelTrigger.subscribe { [weak self] _ in
-            self?.coordinator?.finish()
+            self?.coordinator?.cancel()
         }.disposed(by: disposBag)
         
         startNowTrigger.subscribe { [weak self] _ in
@@ -61,8 +61,8 @@ class PaywallVM {
         Task { @MainActor in
             do {
                 try await subscriptionService.purchase(product)
-            } catch {
                 coordinator?.finish()
+            } catch {
                 self.error.accept(SubscriptionError.vericationFailed)
             }
         }
