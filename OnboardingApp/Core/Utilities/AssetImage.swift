@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct AssetImage {
+enum AssetImage {
     
     static let paywallTitleImage = "Onboarding4Light"
 }
