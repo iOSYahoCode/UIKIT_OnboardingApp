@@ -6,8 +6,25 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		BCE018232EB228910003544D /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = BCE018222EB228910003544D /* SnapKit */; };
+		BCE0DDB02EB34E0100CBF106 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = BCE0DDAF2EB34E0100CBF106 /* RxCocoa */; };
+		BCE0DDB22EB34E0100CBF106 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BCE0DDB12EB34E0100CBF106 /* RxSwift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BCE0186E2EB239590003544D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BCE0176C2EB21FE70003544D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BCE017732EB21FE70003544D;
+			remoteInfo = OnboardingApp;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		BCE017742EB21FE70003544D /* OnboardingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnboardingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BCE0186A2EB239590003544D /* OnboardingAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnboardingAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -29,10 +46,25 @@
 			path = OnboardingApp;
 			sourceTree = "<group>";
 		};
+		BCE0186B2EB239590003544D /* OnboardingAppTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = OnboardingAppTests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		BCE017712EB21FE70003544D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BCE0DDB22EB34E0100CBF106 /* RxSwift in Frameworks */,
+				BCE0DDB02EB34E0100CBF106 /* RxCocoa in Frameworks */,
+				BCE018232EB228910003544D /* SnapKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCE018672EB239590003544D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -46,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				BCE017762EB21FE70003544D /* OnboardingApp */,
+				BCE0186B2EB239590003544D /* OnboardingAppTests */,
 				BCE017752EB21FE70003544D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				BCE017742EB21FE70003544D /* OnboardingApp.app */,
+				BCE0186A2EB239590003544D /* OnboardingAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -78,10 +112,36 @@
 			);
 			name = OnboardingApp;
 			packageProductDependencies = (
+				BCE018222EB228910003544D /* SnapKit */,
+				BCE0DDAF2EB34E0100CBF106 /* RxCocoa */,
+				BCE0DDB12EB34E0100CBF106 /* RxSwift */,
 			);
 			productName = OnboardingApp;
 			productReference = BCE017742EB21FE70003544D /* OnboardingApp.app */;
 			productType = "com.apple.product-type.application";
+		};
+		BCE018692EB239590003544D /* OnboardingAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BCE018702EB239590003544D /* Build configuration list for PBXNativeTarget "OnboardingAppTests" */;
+			buildPhases = (
+				BCE018662EB239590003544D /* Sources */,
+				BCE018672EB239590003544D /* Frameworks */,
+				BCE018682EB239590003544D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BCE0186F2EB239590003544D /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				BCE0186B2EB239590003544D /* OnboardingAppTests */,
+			);
+			name = OnboardingAppTests;
+			packageProductDependencies = (
+			);
+			productName = OnboardingAppTests;
+			productReference = BCE0186A2EB239590003544D /* OnboardingAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -96,6 +156,10 @@
 					BCE017732EB21FE70003544D = {
 						CreatedOnToolsVersion = 26.0.1;
 					};
+					BCE018692EB239590003544D = {
+						CreatedOnToolsVersion = 26.0.1;
+						TestTargetID = BCE017732EB21FE70003544D;
+					};
 				};
 			};
 			buildConfigurationList = BCE0176F2EB21FE70003544D /* Build configuration list for PBXProject "OnboardingApp" */;
@@ -107,18 +171,30 @@
 			);
 			mainGroup = BCE0176B2EB21FE70003544D;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				BCE018212EB228910003544D /* XCRemoteSwiftPackageReference "SnapKit" */,
+				BCE0DDAE2EB34E0100CBF106 /* XCRemoteSwiftPackageReference "RxSwift" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = BCE017752EB21FE70003544D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				BCE017732EB21FE70003544D /* OnboardingApp */,
+				BCE018692EB239590003544D /* OnboardingAppTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		BCE017722EB21FE70003544D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCE018682EB239590003544D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -135,7 +211,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BCE018662EB239590003544D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BCE0186F2EB239590003544D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BCE017732EB21FE70003544D /* OnboardingApp */;
+			targetProxy = BCE0186E2EB239590003544D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		BCE017882EB21FE90003544D /* Debug */ = {
@@ -331,6 +422,56 @@
 			};
 			name = Release;
 		};
+		BCE018712EB239590003544D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8X8QHL87ZY;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = me.yaroslavhomziak.OnboardingAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OnboardingApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/OnboardingApp";
+			};
+			name = Debug;
+		};
+		BCE018722EB239590003544D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8X8QHL87ZY;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = me.yaroslavhomziak.OnboardingAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OnboardingApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/OnboardingApp";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -352,7 +493,53 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		BCE018702EB239590003544D /* Build configuration list for PBXNativeTarget "OnboardingAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BCE018712EB239590003544D /* Debug */,
+				BCE018722EB239590003544D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BCE018212EB228910003544D /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+		BCE0DDAE2EB34E0100CBF106 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.9.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BCE018222EB228910003544D /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BCE018212EB228910003544D /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		BCE0DDAF2EB34E0100CBF106 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BCE0DDAE2EB34E0100CBF106 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		BCE0DDB12EB34E0100CBF106 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BCE0DDAE2EB34E0100CBF106 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BCE0176C2EB21FE70003544D /* Project object */;
 }
