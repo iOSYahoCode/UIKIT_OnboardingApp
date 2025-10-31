@@ -15,14 +15,9 @@ import SafariServices
 class PaywallVC: UIViewController {
     
     private let viewModel: PaywallVM
-    private let titleImage: UIImageView = {
-        let image = UIImage(named: "Onboarding4Light")
-        return UIImageView(image: image)
-    }()
     
     private let titleLabel = TitleLabel(labelText: "Discover all Premium features", alignment: .left)
     private let pricingLabel = UILabel()
-    
     private let startNowButton = PrimaryButton(labelText: "Start Now",
                                                activeTextColor: .white,
                                                disableTextColor: .disablePrimaryText,
@@ -31,11 +26,19 @@ class PaywallVC: UIViewController {
     
     private lazy var closeButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "xmark"), for: .normal)
+        button.setImage(UIImage(systemName: SystemImage.xMark), for: .normal)
         button.tintColor = .primaryText
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
+    }()
+    
+    private let titleImage: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: AssetImage.paywallTitleImage))
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
     
     let termsTextView = TermsTextView()
@@ -76,7 +79,6 @@ class PaywallVC: UIViewController {
         elements.forEach { view.addSubview($0) }
         pricingLabel.numberOfLines = 2
         pricingLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleImage.translatesAutoresizingMaskIntoConstraints = false
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         
         layoutUI()
