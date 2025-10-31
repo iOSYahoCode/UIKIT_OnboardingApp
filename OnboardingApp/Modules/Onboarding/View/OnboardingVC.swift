@@ -19,9 +19,10 @@ class OnboardingVC: UIViewController {
     
     private let continueButton = PrimaryButton(labelText: "Continue",
                                                activeTextColor: .white,
-                                               disableTextColor: .gray,
+                                               disableTextColor: .disablePrimaryText,
                                                activeBackgroundColor: .black,
-                                               disableBakgroundColor: .white)
+                                               disableBakgroundColor: .white,
+                                               isEnabled: false)
     
     private let answerStackView: UIStackView = {
         let stack = UIStackView()
@@ -29,6 +30,13 @@ class OnboardingVC: UIViewController {
         stack.spacing = 12
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
+    }()
+    
+    private lazy var indicator: UIActivityIndicatorView  = {
+        let indicator = UIActivityIndicatorView(style: .medium)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.hidesWhenStopped = true
+        return indicator
     }()
     
     private var answerButtons: [AnswerButton] = []
@@ -51,8 +59,9 @@ class OnboardingVC: UIViewController {
     }
     
     private func configure() {
-        let elements = [titleLabel, questionLabel, answerStackView, continueButton]
+        let elements = [titleLabel, questionLabel, answerStackView, continueButton, indicator]
         elements.forEach { view.addSubview($0) }
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         layoutUI()
     }
     
@@ -76,9 +85,13 @@ class OnboardingVC: UIViewController {
         }
         
         continueButton.snp.makeConstraints { make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-verticalOffset)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-48)
             make.leading.trailing.equalToSuperview().inset(horizontalOffset)
             make.height.equalTo(56)
+        }
+        
+        indicator.snp.makeConstraints { make in
+            make.center.equalTo(view.snp.center)
         }
     }
     
@@ -100,9 +113,24 @@ class OnboardingVC: UIViewController {
             .bind(to: continueButton.rx.isEnabled)
             .disposed(by: disposeBag)
         
+        viewModel.isLoading
+            .map{$0}
+            .bind(to: questionLabel.rx.isHidden, answerStackView.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        viewModel.isLoading
+            .subscribe{[weak self] isLoading in
+                if isLoading {
+                    self?.indicator.startAnimating()
+                } else {
+                    self?.indicator.stopAnimating()
+                }
+            }.disposed(by: disposeBag)
+        
         continueButton.rx.tap
             .bind(to: viewModel.continueTrigger)
             .disposed(by: disposeBag)
+        
     }
     
     private func updateQuestion(_ item: OnboardingItem) {
