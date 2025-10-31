@@ -8,6 +8,8 @@
 import UIKit
 extension UIColor {
     static let primaryText = UIColor(named: "TextPrimary") ?? .label
+    static let grayText = UIColor(named: "TextGray") ?? . gray
+    static let disablePrimaryText = UIColor(named: "DisableTextPrimary") ?? .gray
     static let primaryBackground = UIColor(named: "Background") ?? .white
     static let answerSelected = UIColor(named: "SelectAnswer") ?? .green
 }

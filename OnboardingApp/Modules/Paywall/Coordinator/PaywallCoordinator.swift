@@ -21,11 +21,22 @@ class PaywallCoordinator: Coordinator {
     }
     
     func start() {
+        let viewModel = PaywallVM()
+        let paywallVC = PaywallVC(viewModel: viewModel)
+        viewModel.coordinator = self
         
+        navigationController.pushViewController(paywallVC, animated: true)
     }
     
     func finish() {
-        
+        //TODO: Navigate to main app screen
+        print("Paywall completed. User subscribed")
         delegate?.paywallDidFinish(self)
+    }
+    
+    func cancel() {
+        //TODO: Handle paywall dismiss
+        print("Paywall dismissed. User cancelled")
+        delegate?.paywallDidCancel(self)
     }
 }

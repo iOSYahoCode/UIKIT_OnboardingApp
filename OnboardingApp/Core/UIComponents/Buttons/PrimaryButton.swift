@@ -28,7 +28,8 @@ class PrimaryButton: UIButton {
          activeTextColor: UIColor,
          disableTextColor: UIColor,
          activeBackgroundColor: UIColor,
-         disableBakgroundColor: UIColor) {
+         disableBakgroundColor: UIColor,
+         isEnabled: Bool = true) {
         
         self.activeTextColor = activeTextColor
         self.disableTextColor = disableTextColor
@@ -36,7 +37,7 @@ class PrimaryButton: UIButton {
         self.disableBakgroundColor = disableBakgroundColor
         
         super.init(frame: .zero)
-        isEnabled = false
+        self.isEnabled = isEnabled
         configure(with: labelText)
         updateAppearance(isAnimated: false)
     }
