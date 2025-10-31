@@ -13,6 +13,7 @@ class OnboardingVM {
     
     weak var coordinator: OnboardingCoordinator?
     
+    let requestQuestionsTrigger = PublishRelay<Void>()
     let selectAnswerTrigger = PublishRelay<Int>()
     let continueTrigger = PublishRelay<Void>()
     let error = PublishRelay<Error>()
@@ -69,6 +70,10 @@ class OnboardingVM {
         
         continueTrigger.subscribe { [weak self] _ in
             self?.handleContinueTapped()
+        }.disposed(by: disposeBag)
+        
+        requestQuestionsTrigger.subscribe { [weak self] _ in
+            self?.loadQuestionList()
         }.disposed(by: disposeBag)
     }
     
