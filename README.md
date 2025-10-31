@@ -78,5 +78,5 @@ This project is created as a test task and is for demonstration purposes only.
 
 **[Yaroslav Homziak]**
 - Email: ywgk0102@gmail.com
-- LinkedIn: [Your LinkedIn](https://www.linkedin.com/in/yaroslav-homziak/)
-- GitHub: [@yourusername](https://github.com/iOSYahoCode)
+- LinkedIn: [Yaroslav Homziak](https://www.linkedin.com/in/yaroslav-homziak/)
+- GitHub: [@iOSYahoCode](https://github.com/iOSYahoCode)
