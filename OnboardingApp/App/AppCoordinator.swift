@@ -7,8 +7,10 @@
 
 import UIKit
 class AppCoordinator: Coordinator {
+    
     let navigationController: UINavigationController
     private var childCoordinators: [Coordinator] = []
+    
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -51,7 +53,7 @@ extension AppCoordinator: OnboardingCoordinatorDelegate {
 extension AppCoordinator: PaywallCoordinatorDelegate {
     func paywallDidFinish(_ coordinator: PaywallCoordinator) {
         remove(coordinator)
-        // TODO: Show main app screen
+        // TODO: Show main app screen (out of this test task)
     }
     
     func paywallDidCancel(_ coordinator: PaywallCoordinator) {

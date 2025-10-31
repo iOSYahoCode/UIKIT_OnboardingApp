@@ -10,6 +10,7 @@ class OnboardingService: OnboardingServiceProtocol {
     
     private let networkManager: NetworkManager
     
+    
     init(networkManager: NetworkManager = NetworkManager()) {
         self.networkManager = networkManager
     }

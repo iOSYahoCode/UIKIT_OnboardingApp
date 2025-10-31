@@ -13,7 +13,7 @@ final class OnboardingResponseTests: XCTestCase {
     func testValidJSONDecoding() throws {
         
         //Arrange
-        let json = """
+        let jsonData = """
             {
                 "items": [
                         {
@@ -53,12 +53,14 @@ final class OnboardingResponseTests: XCTestCase {
                         }
                     ]
                 }
-            """.data(using: .utf8)!
+            """.data(using: .utf8)
         
         let decoder = JSONDecoder()
         
         //Act
-        
+        guard let json = jsonData else {
+            throw XCTSkip("No JSON data")
+        }
         let response = try decoder.decode(OnboardingResponse.self, from: json)
         
         //Assert

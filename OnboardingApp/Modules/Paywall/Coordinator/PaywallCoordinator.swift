@@ -7,14 +7,18 @@
 
 import UIKit
 
+//MARK: Protocols
 protocol PaywallCoordinatorDelegate: AnyObject {
     func paywallDidFinish(_ coordinator: PaywallCoordinator)
     func paywallDidCancel(_ coordinator: PaywallCoordinator)
 }
 
+//MARK: Class
 class PaywallCoordinator: Coordinator {
+    
     let navigationController: UINavigationController
     weak var delegate: PaywallCoordinatorDelegate?
+    
     
     init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -29,7 +33,7 @@ class PaywallCoordinator: Coordinator {
     }
     
     func finish() {
-        //TODO: Navigate to main app screen
+        //TODO: Navigate to main app screen (out of this test task)
         print("Paywall completed. User subscribed")
         delegate?.paywallDidFinish(self)
     }

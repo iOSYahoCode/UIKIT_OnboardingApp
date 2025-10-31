@@ -24,6 +24,7 @@ class SubscriptionService {
         return !purchasedProductIDs.value.isEmpty
     }
     
+    
     private init() {
         Task {
             await observeTransactionUpdates()

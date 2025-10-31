@@ -8,6 +8,7 @@
 import UIKit
 
 class H2Label: BaseLabel {
+    
     override func configure() {
         super.configure()
         font = .systemFont(ofSize: 20, weight: .semibold)
