@@ -53,7 +53,7 @@ extension AppCoordinator: OnboardingCoordinatorDelegate {
 extension AppCoordinator: PaywallCoordinatorDelegate {
     func paywallDidFinish(_ coordinator: PaywallCoordinator) {
         remove(coordinator)
-        // TODO: Show main app screen
+        // TODO: Show main app screen (out of this test task)
     }
     
     func paywallDidCancel(_ coordinator: PaywallCoordinator) {

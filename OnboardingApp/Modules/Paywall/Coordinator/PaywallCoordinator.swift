@@ -33,7 +33,7 @@ class PaywallCoordinator: Coordinator {
     }
     
     func finish() {
-        //TODO: Navigate to main app screen
+        //TODO: Navigate to main app screen (out of this test task)
         print("Paywall completed. User subscribed")
         delegate?.paywallDidFinish(self)
     }
