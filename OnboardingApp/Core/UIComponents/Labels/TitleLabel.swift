@@ -12,5 +12,6 @@ class TitleLabel: BaseLabel {
         super.configure()
         font = UIFont.systemFont(ofSize: 32, weight: .bold)
         textColor = .primaryText
+        numberOfLines = 2
     }
 }
