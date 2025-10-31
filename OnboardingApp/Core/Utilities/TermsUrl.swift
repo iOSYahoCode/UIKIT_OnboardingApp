@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct TermsUrl {
+enum TermsUrl {
     
     static let termsOfUse = "https://uni.tech"
     static let privacyPolicy = "https://uni.tech/join-universe-group"
