@@ -7,5 +7,6 @@
 
 import Foundation
 enum APIEndpoint {
+    
     static let onboardingURL = "https://test-ios.universeapps.limited/onboarding"
 }

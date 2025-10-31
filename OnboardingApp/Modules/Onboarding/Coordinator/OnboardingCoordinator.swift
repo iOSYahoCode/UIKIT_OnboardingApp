@@ -7,13 +7,17 @@
 
 import UIKit
 
+//MARK: Protocols
 protocol OnboardingCoordinatorDelegate: AnyObject {
     func onboardingDidFinish(_ coordinator: OnboardingCoordinator)
 }
 
+//MARK: Class
 class OnboardingCoordinator: Coordinator {
+    
     let navigationController: UINavigationController
     weak var delegate: OnboardingCoordinatorDelegate?
+    
     
     init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController

@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 
 class OnboardingVC: UIViewController {
+    
     let viewModel: OnboardingVM
     let disposeBag = DisposeBag()
     
@@ -23,6 +24,14 @@ class OnboardingVC: UIViewController {
                                                activeBackgroundColor: .black,
                                                disableBakgroundColor: .white,
                                                isEnabled: false)
+    
+    private let scrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.showsVerticalScrollIndicator = true
+        scroll.showsHorizontalScrollIndicator = false
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        return scroll
+    }()
     
     private let answerStackView: UIStackView = {
         let stack = UIStackView()
@@ -59,8 +68,9 @@ class OnboardingVC: UIViewController {
     }
     
     private func configure() {
-        let elements = [titleLabel, questionLabel, answerStackView, continueButton, indicator]
+        let elements = [titleLabel, questionLabel, scrollView, continueButton, indicator]
         elements.forEach { view.addSubview($0) }
+        scrollView.addSubview(answerStackView)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         layoutUI()
     }
@@ -79,9 +89,15 @@ class OnboardingVC: UIViewController {
             make.leading.trailing.equalToSuperview().inset(horizontalOffset)
         }
         
-        answerStackView.snp.makeConstraints { make in
+        scrollView.snp.makeConstraints { make in
             make.top.equalTo(questionLabel.snp.bottom).offset(verticalOffset)
             make.leading.trailing.equalToSuperview().inset(horizontalOffset)
+            make.bottom.equalTo(continueButton.snp.top).offset(-verticalOffset)
+        }
+        
+        answerStackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+            make.width.equalTo(scrollView)
         }
         
         continueButton.snp.makeConstraints { make in
@@ -139,9 +155,12 @@ class OnboardingVC: UIViewController {
         UIView.animate(withDuration: 0.3) {
             self.questionLabel.alpha = 0
             self.answerStackView.alpha = 0
+            self.scrollView.showsVerticalScrollIndicator = false
         } completion: { _ in
             self.questionLabel.text = item.question
             self.setupAnswerButtons(answers: item.answers)
+            self.scrollView.contentOffset = .zero
+            self.scrollView.showsVerticalScrollIndicator = true
             
             UIView.animate(withDuration: 0.3) {
                 self.questionLabel.alpha = 1

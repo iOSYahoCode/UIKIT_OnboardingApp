@@ -7,6 +7,7 @@
 
 import UIKit
 extension UIColor {
+    
     static let primaryText = UIColor(named: "TextPrimary") ?? .label
     static let grayText = UIColor(named: "TextGray") ?? . gray
     static let disablePrimaryText = UIColor(named: "DisableTextPrimary") ?? .gray

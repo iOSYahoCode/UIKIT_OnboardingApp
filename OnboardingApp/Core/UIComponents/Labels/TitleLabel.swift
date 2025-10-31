@@ -8,6 +8,7 @@
 import UIKit
 
 class TitleLabel: BaseLabel {
+    
     override func configure() {
         super.configure()
         font = UIFont.systemFont(ofSize: 32, weight: .bold)
