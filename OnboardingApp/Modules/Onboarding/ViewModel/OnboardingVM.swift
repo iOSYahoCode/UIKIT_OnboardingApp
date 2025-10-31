@@ -17,6 +17,7 @@ class OnboardingVM {
     let continueTrigger = PublishRelay<Void>()
     let error = PublishRelay<Error>()
     
+    let isLoading = BehaviorRelay<Bool>(value: false)
     let currentQuestion: BehaviorRelay<OnboardingItem?> = BehaviorRelay(value: nil)
     let isContinueEnable: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     
@@ -36,6 +37,7 @@ class OnboardingVM {
     }
     
     private func loadQuestionList() {
+        isLoading.accept(true)
         Task {
             do {
                 let fetchedQuestions = try await onboardingService.fetchQuestions()
@@ -47,11 +49,13 @@ class OnboardingVM {
                     if let first = self.questions.first {
                         self.currentQuestion.accept(first)
                     }
+                    isLoading.accept(false)
                 }
                 
             } catch {
                 await MainActor.run {
                     self.error.accept(error)
+                    isLoading.accept(false)
                 }
             }
         }
