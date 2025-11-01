@@ -196,10 +196,7 @@ class OnboardingVC: UIViewController {
         
         alert.addAction(UIAlertAction(title: "Retry", style: .default) { [weak self] _ in
             self?.viewModel.requestQuestionsTrigger.accept(())
-        })
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        
+        })        
         present(alert, animated: true)
     }
     
