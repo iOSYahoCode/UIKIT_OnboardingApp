@@ -20,10 +20,6 @@ class SubscriptionService {
     let products = BehaviorRelay<[Product]>(value: [])
     let purchasedProductIDs = BehaviorRelay<Set<String>>(value: [])
     
-    var hasActiveSubscriptions: Bool {
-        return !purchasedProductIDs.value.isEmpty
-    }
-    
     
     private init() {
         Task {

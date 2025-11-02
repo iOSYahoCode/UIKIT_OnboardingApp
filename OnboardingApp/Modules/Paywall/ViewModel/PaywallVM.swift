@@ -21,7 +21,6 @@ class PaywallVM {
     let cancelTrigger = PublishRelay<Void>()
     
     let product = BehaviorRelay<Product?>(value: nil)
-    let hasActiveSubscription = BehaviorRelay<Bool>(value: false)
     let error = PublishRelay<Error>()
     
     
@@ -44,9 +43,6 @@ class PaywallVM {
         
         Task { @MainActor in
             do {
-                await subscriptionService.restorePurchase()
-                hasActiveSubscription.accept(subscriptionService.hasActiveSubscriptions)
-                
                 try await subscriptionService.loadProducts()
                 if let first = subscriptionService.products.value.first {
                     product.accept(first)
@@ -58,12 +54,6 @@ class PaywallVM {
     }
     
     private func handlePurchase() {
-        if hasActiveSubscription.value {
-            error.accept(SubscriptionError.alreadySubscribed)
-            //TODO: Can call coordinator?.finish()
-            return
-        }
-        
         guard let product = product.value else {
             error.accept(SubscriptionError.productNotFound)
             return
