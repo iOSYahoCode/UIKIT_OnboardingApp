@@ -65,8 +65,6 @@ class PrimaryButton: UIButton {
         self.configuration = config
         
         configureShadow()
-        
-        translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func configureShadow() {
@@ -90,7 +88,7 @@ class PrimaryButton: UIButton {
         }
         
         if isAnimated {
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: Animation.standart) {
                 self.configuration = config
             }
         } else {

@@ -18,7 +18,6 @@ class AnswerButton: UIButton {
         }
     }
     
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -54,7 +53,6 @@ class AnswerButton: UIButton {
         configureShadow()
         
         heightAnchor.constraint(greaterThanOrEqualToConstant: buttonHeight).isActive = true
-        translatesAutoresizingMaskIntoConstraints = false
         
         updateAppearance()
     }
@@ -77,7 +75,7 @@ class AnswerButton: UIButton {
             config.baseForegroundColor = .primaryText
         }
         
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: Animation.standart) {
             self.configuration = config
         }
     }

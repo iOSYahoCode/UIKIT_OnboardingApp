@@ -29,7 +29,5 @@ class BaseLabel: UILabel {
         self.init(labelText: "", alignment: alignment)
     }
     
-    func configure() {
-        translatesAutoresizingMaskIntoConstraints = false
-    }
+    func configure() {}
 }

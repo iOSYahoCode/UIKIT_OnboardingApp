@@ -84,7 +84,7 @@ class SubscriptionService {
     private func checkVerified<T>(_ result: VerificationResult<T>) throws -> T {
         switch result {
         case .unverified(_, _):
-            throw SubscriptionError.vericationFailed
+            throw SubscriptionError.verificationFailed
         case .verified(let signedType):
             return signedType
         }

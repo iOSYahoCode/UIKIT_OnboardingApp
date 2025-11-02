@@ -15,21 +15,27 @@ import SafariServices
 class PaywallVC: UIViewController {
     
     private let viewModel: PaywallVM
+    private let disposeBag = DisposeBag()
     
     private let titleLabel = TitleLabel(labelText: "Discover all Premium features", alignment: .left)
-    private let pricingLabel = UILabel()
+    private let termsTextView = TermsTextView()
+    
+    private let pricingLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 2
+        return label
+    }()
+    
     private let startNowButton = PrimaryButton(labelText: "Start Now",
                                                activeTextColor: .white,
                                                disableTextColor: .disablePrimaryText,
                                                activeBackgroundColor: .black,
                                                disableBakgroundColor: .white)
     
-    private lazy var closeButton: UIButton = {
+    private let closeButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: SystemImage.xMark), for: .normal)
         button.tintColor = .primaryText
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
         return button
     }()
     
@@ -37,12 +43,8 @@ class PaywallVC: UIViewController {
         let imageView = UIImageView(image: UIImage(named: AssetImage.paywallTitleImage))
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    
-    let termsTextView = TermsTextView()
-    let disposeBag = DisposeBag()
     
     
     override func viewDidLoad() {
@@ -75,12 +77,9 @@ class PaywallVC: UIViewController {
     
     private func configure() {
         let elements = [titleImage, closeButton, titleLabel, pricingLabel, startNowButton, termsTextView]
-        
         elements.forEach { view.addSubview($0) }
-        pricingLabel.numberOfLines = 2
-        pricingLabel.translatesAutoresizingMaskIntoConstraints = false
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         layoutUI()
     }
     
@@ -88,44 +87,50 @@ class PaywallVC: UIViewController {
         let verticalOffset: CGFloat = 20
         let horizontalOffset: CGFloat = 24
         
+        let closeButtonTopOffset: CGFloat = 17
+        let closeButtonSize: CGFloat = 15
+        let titleTopOffset: CGFloat = 40
+        let priceTopOffset: CGFloat = 16
+        let startButtonHeight: CGFloat = 56
+        
         titleImage.snp.makeConstraints { make in
-            make.top.equalTo(view.snp.top)
-            make.leading.trailing.equalTo(view)
-            make.height.equalTo(view.frame.height / 2)
+            make.top.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
+            make.height.equalToSuperview().multipliedBy(0.5)
         }
         
         closeButton.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(17)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(closeButtonTopOffset)
             make.trailing.equalToSuperview().inset(horizontalOffset)
-            make.size.equalTo(15)
+            make.size.equalTo(closeButtonSize)
             
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleImage.snp.bottom).offset(40)
-            make.leading.trailing.equalTo(view).inset(horizontalOffset)
+            make.top.equalTo(titleImage.snp.bottom).offset(titleTopOffset)
+            make.leading.trailing.equalToSuperview().inset(horizontalOffset)
         }
         
         pricingLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(16)
-            make.leading.trailing.equalTo(view).inset(horizontalOffset)
+            make.top.equalTo(titleLabel.snp.bottom).offset(priceTopOffset)
+            make.leading.trailing.equalToSuperview().inset(horizontalOffset)
         }
         
         startNowButton.snp.makeConstraints { make in
             make.bottom.equalTo(termsTextView.snp.top).offset(-verticalOffset)
             make.leading.trailing.equalToSuperview().inset(horizontalOffset)
-            make.height.equalTo(56)
+            make.height.equalTo(startButtonHeight)
         }
         
         termsTextView.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide)
-            make.leading.trailing.equalTo(view).inset(horizontalOffset)
+            make.leading.trailing.equalToSuperview().inset(horizontalOffset)
         }
     }
     
     private func bindViewModel() {
         viewModel.product
-            .compactMap {$0}
+            .compactMap { $0 }
             .observe(on: MainScheduler.instance)
             .subscribe() { [weak self] product in
                 self?.updatePrice(product)
@@ -170,7 +175,7 @@ class PaywallVC: UIViewController {
     }
     
     private func showAlert(_ error: Error) {
-        let alert = UIAlertController(title: "Purchase error",
+        let alert = UIAlertController(title: "Purchase info",
                                       message: error.localizedDescription,
                                       preferredStyle: .alert)
         
