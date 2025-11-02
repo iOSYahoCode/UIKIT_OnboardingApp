@@ -12,6 +12,8 @@ import StoreKit
 
 class PaywallVM {
     
+    private let disposBag = DisposeBag()
+    
     var coordinator: PaywallCoordinator?
     
     let subscriptionService = SubscriptionService.shared
@@ -19,13 +21,13 @@ class PaywallVM {
     let cancelTrigger = PublishRelay<Void>()
     
     let product = BehaviorRelay<Product?>(value: nil)
+    let hasActiveSubscription = BehaviorRelay<Bool>(value: false)
     let error = PublishRelay<Error>()
-    let disposBag = DisposeBag()
     
     
     init() {
         setupBindings()
-        loadProducts()
+        restoreAndLoadProducts()
     }
     
     private func setupBindings() {
@@ -38,10 +40,13 @@ class PaywallVM {
         }.disposed(by: disposBag)
     }
     
-    private func loadProducts() {
+    private func restoreAndLoadProducts() {
         
         Task { @MainActor in
             do {
+                await subscriptionService.restorePurchase()
+                hasActiveSubscription.accept(subscriptionService.hasActiveSubscriptions)
+                
                 try await subscriptionService.loadProducts()
                 if let first = subscriptionService.products.value.first {
                     product.accept(first)
@@ -53,6 +58,12 @@ class PaywallVM {
     }
     
     private func handlePurchase() {
+        if hasActiveSubscription.value {
+            error.accept(SubscriptionError.alreadySubscribed)
+            //TODO: Can call coordinator?.finish()
+            return
+        }
+        
         guard let product = product.value else {
             error.accept(SubscriptionError.productNotFound)
             return
@@ -63,7 +74,7 @@ class PaywallVM {
                 try await subscriptionService.purchase(product)
                 coordinator?.finish()
             } catch {
-                self.error.accept(SubscriptionError.vericationFailed)
+                self.error.accept(SubscriptionError.verificationFailed)
             }
         }
     }

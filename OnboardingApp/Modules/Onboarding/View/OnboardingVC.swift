@@ -12,8 +12,8 @@ import RxCocoa
 
 class OnboardingVC: UIViewController {
     
-    let viewModel: OnboardingVM
-    let disposeBag = DisposeBag()
+    private let viewModel: OnboardingVM
+    private let disposeBag = DisposeBag()
     
     private let titleLabel = H1Label(labelText: "Let’s setup App for you", alignment: .left)
     private let questionLabel = H2Label(alignment: .left)
@@ -29,7 +29,6 @@ class OnboardingVC: UIViewController {
         let scroll = UIScrollView()
         scroll.showsVerticalScrollIndicator = true
         scroll.showsHorizontalScrollIndicator = false
-        scroll.translatesAutoresizingMaskIntoConstraints = false
         return scroll
     }()
     
@@ -37,13 +36,11 @@ class OnboardingVC: UIViewController {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.spacing = 12
-        stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
-    private lazy var indicator: UIActivityIndicatorView  = {
+    private var indicator: UIActivityIndicatorView  = {
         let indicator = UIActivityIndicatorView(style: .medium)
-        indicator.translatesAutoresizingMaskIntoConstraints = false
         indicator.hidesWhenStopped = true
         return indicator
     }()
@@ -71,6 +68,7 @@ class OnboardingVC: UIViewController {
         let elements = [titleLabel, questionLabel, scrollView, continueButton, indicator]
         elements.forEach { view.addSubview($0) }
         scrollView.addSubview(answerStackView)
+        
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         layoutUI()
     }
@@ -79,13 +77,17 @@ class OnboardingVC: UIViewController {
         let verticalOffset: CGFloat = 20
         let horizontalOffset: CGFloat = 24
         
+        let questionTopOffset: CGFloat = 32
+        let continueButtonBottomOffset: CGFloat = 48
+        let continueButtonHeight: CGFloat = 56
+        
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(verticalOffset)
             make.leading.trailing.equalToSuperview().inset(horizontalOffset)
         }
         
         questionLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(32)
+            make.top.equalTo(titleLabel.snp.bottom).offset(questionTopOffset)
             make.leading.trailing.equalToSuperview().inset(horizontalOffset)
         }
         
@@ -101,19 +103,19 @@ class OnboardingVC: UIViewController {
         }
         
         continueButton.snp.makeConstraints { make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-48)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(continueButtonBottomOffset)
             make.leading.trailing.equalToSuperview().inset(horizontalOffset)
-            make.height.equalTo(56)
+            make.height.equalTo(continueButtonHeight)
         }
         
         indicator.snp.makeConstraints { make in
-            make.center.equalTo(view.snp.center)
+            make.center.equalToSuperview()
         }
     }
     
     private func bindViewModel() {
         viewModel.currentQuestion
-            .compactMap{$0}
+            .compactMap { $0 }
             .observe(on: MainScheduler.instance)
             .subscribe { [weak self] item in
                 self?.updateQuestion(item)
@@ -130,7 +132,7 @@ class OnboardingVC: UIViewController {
             .disposed(by: disposeBag)
         
         viewModel.isLoading
-            .map{$0}
+            .map { $0 }
             .bind(to: questionLabel.rx.isHidden, answerStackView.rx.isHidden)
             .disposed(by: disposeBag)
         
@@ -152,7 +154,7 @@ class OnboardingVC: UIViewController {
     private func updateQuestion(_ item: OnboardingItem) {
         continueButton.isEnabled = false
         
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: Animation.standart) {
             self.questionLabel.alpha = 0
             self.answerStackView.alpha = 0
             self.scrollView.showsVerticalScrollIndicator = false
@@ -162,7 +164,7 @@ class OnboardingVC: UIViewController {
             self.scrollView.contentOffset = .zero
             self.scrollView.showsVerticalScrollIndicator = true
             
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: Animation.standart) {
                 self.questionLabel.alpha = 1
                 self.answerStackView.alpha = 1
             }

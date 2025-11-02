@@ -10,7 +10,7 @@ import UIKit
 class TermsTextView: UITextView {
     
     var onLinkTaped: ((URL) -> Void)?
-    
+
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -32,8 +32,6 @@ class TermsTextView: UITextView {
         textContainerInset = .zero
         textContainer.lineFragmentPadding = 0
         delegate = self
-        
-        translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func setText() {

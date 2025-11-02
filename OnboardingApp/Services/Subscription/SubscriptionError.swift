@@ -6,8 +6,25 @@
 //
 
 import Foundation
-enum SubscriptionError: Error {
-    case productNotFound
+enum SubscriptionError: LocalizedError {
     case purchaseFailed
-    case vericationFailed
+    case verificationFailed
+    case productNotFound
+    case noPurchasesToRestore
+    case alreadySubscribed
+    
+    var errorDescription: String? {
+        switch self {
+        case .purchaseFailed:
+            return "Purchase failed. Please try again."
+        case .verificationFailed:
+            return "Unable to verify purchase."
+        case .productNotFound:
+            return "Product not available."
+        case .noPurchasesToRestore:
+            return "No previous purchases found."
+        case .alreadySubscribed:
+            return "You already have an active subscription."
+        }
+    }
 }
